@@ -1,5 +1,8 @@
-# nodejs-express-template
-Repository Template for NodeJS + Express.
+# Odin Project: Members Only
+
+A server based webapp creating an exclusive clubhouse where registered members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.
+
+
 
 Run `npm install` to install all packages/dev dependencies.<br>
 Run `npm outdated` to check if any packages are outdated (can generally ignore yellow packages: current version is the wanted version, but not the latest version).<br>
@@ -27,3 +30,7 @@ Default server link: http://localhost:8080/
 - ejs
 - express-validator
 - pg
+- express-session
+- passport
+- passport-local
+- bcryptjs
