@@ -8,40 +8,15 @@ const dbController = require("../controllers/dbController");
 router.get("/", dbController.openHome);
 
 router.get("/sign-up", dbController.openSignup);
+router.post("/sign-up", dbController.submitSignup);
 
 
-// app.get("/sign-up", (req, res) => res.render("sign-up-form"));
-// app.post("/sign-up", async (req, res, next) => {
-//  try {
-//   // encrypts input password by first adding a number of extra random chars to the end of the input (num in 2nd arg, this is known as "salting"), then hashes the result
-//   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-//   await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [req.body.username, hashedPassword]);
-//   res.redirect("/");
-//  } catch (error) {
-//     console.error(error);
-//     next(error);
-//    }
-// });
+// passport.authenticate("local", ...) applys the LocalStrategy stored in passport
+router.post("/log-in", dbController.logIn);
 
-// // passport.authenticate("local", ...) applys the LocalStrategy stored in passport
-// app.post(
-//   "/log-in",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/",
-//     failureMessage: true,
-//   })
-// );
 
-// // logout() is built into passport
-// app.get("/log-out", (req, res, next) => {
-//   req.logout((err) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.redirect("/");
-//   });
-// });
+// logout() is built into passport
+router.get("/log-out", dbController.logOut);
 
 
 

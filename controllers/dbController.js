@@ -1,5 +1,7 @@
-const { body, validationResult, matchedData } = require("express-validator");
+// const { body, validationResult, matchedData } = require("express-validator");
+const bcrypt = require("bcryptjs");
 const db = require("../db/queries");
+const passport = require("../auth/authController");
 
 
 async function openHome(req, res) {
@@ -12,9 +14,46 @@ async function openSignup(req, res) {
 }
 
 
+async function submitSignup(req, res, next) {
+  try {
+  // encrypts input password by first adding a number of extra random chars to the end of the input (num in 2nd arg, this is known as "salting"), then hashes the result
+  console.log(req.body);
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  db.createUser(req.body.username, hashedPassword);
+  res.redirect("/");
+  }
+  catch (error) {
+    console.error(error);
+    next(error);
+  }
+}
+
+
+async function logIn() {
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+    failureMessage: true,
+  });
+}
+
+
+async function logOut(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+
+
 module.exports = {
   openHome,
   openSignup,
+  submitSignup,
+  logIn,
+  logOut,
 };
 
 
