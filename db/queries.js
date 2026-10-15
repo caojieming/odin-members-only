@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
-async function createUser(username, hashedPassword) {
-  await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [username, hashedPassword]);
+async function createUser(name, username, hashedPassword) {
+  await pool.query("INSERT INTO users (name, username, password, membership) VALUES ($1, $2, $3, $4)", [name, username, hashedPassword, "basic"]);
 }
 
 module.exports = {

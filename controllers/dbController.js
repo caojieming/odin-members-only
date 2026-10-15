@@ -19,7 +19,7 @@ async function submitSignup(req, res, next) {
   // encrypts input password by first adding a number of extra random chars to the end of the input (num in 2nd arg, this is known as "salting"), then hashes the result
   console.log(req.body);
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  db.createUser(req.body.username, hashedPassword);
+  db.createUser(req.body.name, req.body.username, hashedPassword);
   res.redirect("/");
   }
   catch (error) {
@@ -29,15 +29,16 @@ async function submitSignup(req, res, next) {
 }
 
 
-async function logIn() {
-  passport.authenticate("local", {
+async function logIn(req, res, next) {
+  return passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/",
     failureMessage: true,
-  });
+  })(req, res, next);
 }
 
 
+// logout() is a built-in function of passport
 async function logOut(req, res, next) {
   req.logout((err) => {
     if (err) {

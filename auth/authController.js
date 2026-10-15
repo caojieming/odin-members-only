@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
+const pool = require("../db/pool");
 
 // adds strategy to passport that searches for username in DB, and checks if the input password is correct
 passport.use(
