@@ -1,7 +1,17 @@
 const pool = require("./pool");
 
 async function createUser(name, username, hashedPassword) {
-  await pool.query("INSERT INTO users (name, username, password, membership) VALUES ($1, $2, $3, $4)", [name, username, hashedPassword, "basic"]);
+  const errors = [];
+  try {
+    await pool.query("INSERT INTO users (name, username, password, membership) VALUES ($1, $2, $3, $4)", [name, username, hashedPassword, "basic"]);
+  }
+  catch (err) {
+    // specific error code for primary key conflict
+    if (err.code === "23505") {
+      errors.push({ msg: "Input username is not available." });
+    }
+  }
+  return errors;
 }
 
 module.exports = {

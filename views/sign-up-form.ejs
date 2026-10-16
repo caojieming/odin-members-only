@@ -2,21 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- set styling file -->
+  <link rel="stylesheet" href="/css/base.css">
   <title>Sign Up</title>
 </head>
 <body>
-  <a href="/">Go back home</a>
-  <h1>Sign Up</h1>
-  <form action="/sign-up" method="POST">
-    <label for="name">Name</label>
-    <input id="name" name="name" placeholder="name" type="text" />
-    <br>
-    <label for="username">Username</label>
-    <input id="username" name="username" placeholder="username" type="text" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
-    <br>
-    <button type="submit">Sign Up</button>
-  </form>
+  <main>
+
+    <a href="/">Go back home</a>
+    <h1>Sign Up</h1>
+
+    <%- include("partials/errors.ejs") %>
+
+    <form action="/sign-up" method="POST">
+      <div class="form-section">
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="name" type="text" />
+      </div>
+      <div class="form-section">
+        <label for="username">Username</label>
+        <input id="username" name="username" placeholder="username" type="text" />
+      </div>
+      <div class="form-section">
+        <label for="password">Password</label>
+        <input id="password" name="password" placeholder="password" type="password" />
+      </div>
+      <div class="form-section">
+        <label for="confirm-password">Confirm Password</label>
+        <input id="confirm-password" name="confirm-password" placeholder="confirm password" type="password" />
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+
+  </main>
+  <%- include('./partials/footer') %>
 </body>
 </html>

@@ -8,7 +8,7 @@ const dbController = require("../controllers/dbController");
 router.get("/", dbController.openHome);
 
 router.get("/sign-up", dbController.openSignup);
-router.post("/sign-up", dbController.submitSignup);
+router.post("/sign-up", dbController.validateSignup, dbController.submitSignup);
 
 
 // passport.authenticate("local", ...) applys the LocalStrategy stored in passport
