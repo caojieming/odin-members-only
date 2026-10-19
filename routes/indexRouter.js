@@ -5,9 +5,9 @@ const dbController = require("../controllers/dbController");
 
 // NOTE TO SELF: ordering here matters, put /:A/B before /:A/:C, otherwise all pages that should be /:A/B will instead be assumed as /:A/:C
 
-router.get("/", dbController.openHome);
+router.get("/", (req, res) => res.render("index", { user: req.user }));
 
-router.get("/sign-up", dbController.openSignup);
+router.get("/sign-up", (req, res) => res.render("sign-up-form"));
 router.post("/sign-up", dbController.validateSignup, dbController.submitSignup);
 
 
@@ -15,9 +15,10 @@ router.post("/sign-up", dbController.validateSignup, dbController.submitSignup);
 router.post("/log-in", dbController.logIn);
 
 
-// logout() is built into passport
 router.get("/log-out", dbController.logOut);
 
+
+router.get("/membership-form", (req, res) => res.render("membership-form"));
 
 
 

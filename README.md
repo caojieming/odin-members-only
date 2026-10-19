@@ -2,7 +2,9 @@
 
 A server based webapp creating an exclusive clubhouse where registered members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.
 
-
+TODO:
+- add an error message when login fails due to incorrect username or password
+- implement membership secret code logic (currently just an empty page/shell)
 
 Run `npm install` to install all packages/dev dependencies.<br>
 Run `npm outdated` to check if any packages are outdated (can generally ignore yellow packages: current version is the wanted version, but not the latest version).<br>

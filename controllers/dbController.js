@@ -4,16 +4,6 @@ const db = require("../db/queries");
 const passport = require("../auth/authController");
 
 
-async function openHome(req, res) {
-  res.render("index", { user: req.user });
-}
-
-
-async function openSignup(req, res) {
-  res.render("sign-up-form");
-}
-
-
 const validateSignup = [
   body("name").trim()
     .notEmpty().withMessage("Name should not be empty."),
@@ -85,8 +75,6 @@ async function logOut(req, res, next) {
 
 
 module.exports = {
-  openHome,
-  openSignup,
   validateSignup,
   submitSignup,
   logIn,

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- set styling file -->
+  <link rel="stylesheet" href="/css/base.css">
+  <title>Change Membership Status</title>
+</head>
+<body>
+  <main>
+
+    <a href="/">Go back home</a>
+
+    <% if (locals.currentUser) {%>
+      <h1>Currently logged in as <%= currentUser.name %></h1>
+      <h2>Please input the super secret code to the membership level you wish to change to.</h2>
+      <form action="/status-change" method="POST">
+        <label for="membership-code">Secret Code</label>
+        <input id="membership-code" name="membership-code" placeholder="membership code" type="text" />
+        <button type="submit">Submit</button>
+      </form>
+    <% }
+    else { %>
+      <h1>Please log in first before trying to change membership status.</h1>
+      <%- include('./partials/log-in') %>
+    <%}%>
+
+  </main>
+  <%- include('./partials/footer') %>
+</body>
+</html>

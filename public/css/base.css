@@ -18,6 +18,10 @@ input {
   field-sizing: content;
 }
 
+a {
+  display: block;
+}
+
 /* body and main set to keep the footer at the bottom */
 #footer {
   color: white;
