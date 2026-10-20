@@ -45,7 +45,7 @@ async function submitSignup(req, res, next) {
     res.redirect("/");
   }
   else {
-    return res.status(400).render("sign-up-form", {
+    return res.status(409).render("sign-up-form", {
       errors: postErrors,
     });
   }
@@ -54,11 +54,21 @@ async function submitSignup(req, res, next) {
 }
 
 
+// passport.authenticate("local", ...) applys the LocalStrategy stored in passport
 async function logIn(req, res, next) {
-  return passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/",
-    failureMessage: true,
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+
+    if (!user) {
+      return res.status(401).render("index", {
+        errors: [{ msg: info?.message || "Login failed" }]
+      });
+    }
+
+    req.logIn(user, (loginErr) => {
+      if (loginErr) return next(loginErr);
+      return res.redirect('/');
+    });
   })(req, res, next);
 }
 

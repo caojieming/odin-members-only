@@ -11,7 +11,6 @@ router.get("/sign-up", (req, res) => res.render("sign-up-form"));
 router.post("/sign-up", dbController.validateSignup, dbController.submitSignup);
 
 
-// passport.authenticate("local", ...) applys the LocalStrategy stored in passport
 router.post("/log-in", dbController.logIn);
 
 

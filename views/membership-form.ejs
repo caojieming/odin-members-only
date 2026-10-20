@@ -12,7 +12,7 @@
     <a href="/">Go back home</a>
 
     <% if (locals.currentUser) {%>
-      <h1>Currently logged in as <%= currentUser.name %></h1>
+      <h1>Currently logged in as <%= currentUser.username %></h1>
       <h2>Please input the super secret code to the membership level you wish to change to.</h2>
       <form action="/status-change" method="POST">
         <label for="membership-code">Secret Code</label>
@@ -21,8 +21,9 @@
       </form>
     <% }
     else { %>
-      <h1>Please log in first before trying to change membership status.</h1>
-      <%- include('./partials/log-in') %>
+      <h1>Please go back to home and log in first before trying to change membership status.</h1>
+      <%- //include("partials/errors.ejs") %>
+      <%- //include('partials/log-in.ejs') %>
     <%}%>
 
   </main>

@@ -9,14 +9,15 @@
 <body>
   <main>
 
-    <a href="/sign-up">sign up here!</a>
     <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= currentUser.name %>, AKA <%= currentUser.username %></h1>
       <a href="/membership-form">Change membership status!</a>
       <a href="/log-out">LOG OUT</a>
     <% } else { %>
+      <a href="/sign-up">sign up here!</a>
       <h1>Please log in</h1>
-      <%- include('./partials/log-in') %>
+      <%- include("partials/errors.ejs") %>
+      <%- include('partials/log-in.ejs') %>
     <%}%>
 
   </main>
