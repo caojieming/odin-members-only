@@ -22,6 +22,18 @@ a {
   display: block;
 }
 
+h1 > a {
+  color: inherit;
+  text-decoration: inherit; /* no underline */
+}
+
+/* body and main set to keep the footer at the bottom */
+#header {
+  color: black;
+  background-color: lightslategray;
+  text-align: center;
+}
+
 /* body and main set to keep the footer at the bottom */
 #footer {
   color: white;
