@@ -7,34 +7,47 @@ try {
 } catch(error) {}
 
 
-// DROP TABLE IF EXISTS users;
 // DROP TABLE IF EXISTS messages;
+// DROP TABLE IF EXISTS users;
+// DROP TABLE IF EXISTS memberships;
 // the above can be added or removed from the start as needed
 const SQL = `
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS memberships;
+
+CREATE TABLE IF NOT EXISTS memberships (
+  membership VARCHAR(255) NOT NULL,
+  code VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  PRIMARY KEY (membership)
+);
 
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  username VARCHAR(255) NOT NULL UNIQUE,
+  username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  membership VARCHAR(255) NOT NULL
+  membership VARCHAR(255) NOT NULL REFERENCES memberships(membership),
+  PRIMARY KEY (username)
 );
 
 CREATE TABLE IF NOT EXISTS messages (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  author_id BIGINT NOT NULL REFERENCES users(id),
+  author_id VARCHAR(255) NOT NULL REFERENCES users(username),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   body TEXT NOT NULL
 );
 
+INSERT INTO memberships (membership, code, description) 
+VALUES
+  ('Basic', 'basic', 'can post and view messages, but not who wrote them or when it was posted'),
+  ('Member', 'iamamember', 'can post and view messages, including who wrote them and when it was posted'),
+  ('Admin', 'iwillnotabusethispower', 'can post, view, and delete messages');
+
 `;
 
-/*
 
-*/
 
 async function main() {
   console.log("seeding...");

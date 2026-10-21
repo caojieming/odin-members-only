@@ -28,13 +28,13 @@ passport.use(
 
 // stores data in current session data (user login)
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.username);
 });
 
 // retrieves data from current session data (user login)
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (username, done) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
     const user = rows[0];
 
     done(null, user);

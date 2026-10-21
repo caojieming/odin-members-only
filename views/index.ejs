@@ -12,6 +12,7 @@
 
     <% if (locals.currentUser) {%>
       <h1>WELCOME BACK <%= currentUser.name %>, AKA <%= currentUser.username %></h1>
+      <p>Current membership status: <%= currentUser.membership %></p>
       <a href="/membership-form">Change membership status!</a>
       <a href="/log-out">LOG OUT</a>
     <% } else { %>
