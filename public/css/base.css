@@ -15,7 +15,8 @@ main {
 }
 
 input {
-  field-sizing: content;
+  min-width: 100px;
+  width: auto;
 }
 
 a {

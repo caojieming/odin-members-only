@@ -15,6 +15,11 @@
       <p>Current membership status: <%= currentUser.membership %></p>
       <a href="/membership-form">Change membership status!</a>
       <a href="/log-out">LOG OUT</a>
+
+      <section id="messages">
+        <a href="/message-form">Create a new message!</a>
+        <!-- message list goes here -->
+      </section>
     <% } else { %>
       <a href="/sign-up">sign up here!</a>
       <h1>Please log in</h1>

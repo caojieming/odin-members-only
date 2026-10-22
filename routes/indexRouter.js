@@ -17,5 +17,8 @@ router.get("/log-out", dbController.logOut);
 router.get("/membership-form", (req, res) => res.render("membership-form"));
 router.post("/membership-form", dbController.updateMembership);
 
+router.get("/message-form", (req, res) => res.render("message-form"));
+router.post("/message-form", dbController.validateMessage, dbController.submitMessage);
+
 
 module.exports = router;
