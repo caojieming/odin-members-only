@@ -1,6 +1,12 @@
 const pool = require("./pool");
 
 
+async function getAllMessages() {
+  const { rows } = await pool.query("SELECT * FROM messages");
+  return rows;
+}
+
+
 async function createUser(name, username, hashedPassword) {
   const errors = [];
   try {
@@ -48,7 +54,20 @@ async function updateUserMembership(username, membershipCode) {
 }
 
 
+async function createMessage(title, username, body) {
+  const errors = [];
+  try {
+    await pool.query("INSERT INTO messages (title, author_id, body) VALUES ($1, $2, $3)", [title, username, body]);
+  }
+  catch (err) {
+    errors.push({ msg: `error: ${err.message}` });
+  }
+  return errors;
+}
+
+
 module.exports = {
   createUser,
   updateUserMembership,
+  createMessage,
 };

@@ -5,7 +5,7 @@ const dbController = require("../controllers/dbController");
 
 // NOTE TO SELF: ordering here matters, put /:A/B before /:A/:C, otherwise all pages that should be /:A/B will instead be assumed as /:A/:C
 
-router.get("/", (req, res) => res.render("index", { user: req.user }));
+router.get("/", dbController.openHome);
 
 router.get("/sign-up", (req, res) => res.render("sign-up-form"));
 router.post("/sign-up", dbController.validateSignup, dbController.submitSignup);

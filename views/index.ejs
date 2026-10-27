@@ -18,7 +18,17 @@
 
       <section id="messages">
         <a href="/message-form">Create a new message!</a>
-        <!-- message list goes here -->
+        <div class="list">
+          <% for (let i = 0; i < messages.length; i++) { 
+            curMsg = messages[i]; %>
+            <div class="message">
+              <p><%= `Title: ${curMsg.title}` %></p>
+              <p><%= `Author: ${curMsg.author_id}` %></p>
+              <p><%= `Posted: ${curMsg.created_at}` %></p>
+              <p><%= `Body Text: ${curMsg.body}` %></p>
+            </div>
+          <% } %>
+        </div>
       </section>
     <% } else { %>
       <a href="/sign-up">sign up here!</a>
