@@ -1,14 +1,13 @@
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs");
-const pool = require("../db/pool");
+const db = require("../db/queries");
 
 // adds strategy to passport that searches for username in DB, and checks if the input password is correct
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
-      const user = rows[0];
+      const user = await db.getUser(username);
 
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
@@ -34,8 +33,7 @@ passport.serializeUser((user, done) => {
 // retrieves data from current session data (user login)
 passport.deserializeUser(async (username, done) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
-    const user = rows[0];
+    const user = await db.getUser(username);
 
     done(null, user);
   } catch(err) {

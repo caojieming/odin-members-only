@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS memberships (
   membership VARCHAR(255) NOT NULL,
   code VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
+  can_view_authors BOOLEAN NOT NULL DEFAULT false,
+  can_delete BOOLEAN NOT NULL DEFAULT false,
   PRIMARY KEY (membership)
 );
 
@@ -39,11 +41,11 @@ CREATE TABLE IF NOT EXISTS messages (
   body TEXT NOT NULL
 );
 
-INSERT INTO memberships (membership, code, description) 
+INSERT INTO memberships (membership, code, description, can_view_authors, can_delete) 
 VALUES
-  ('Basic', 'basic', 'can post and view messages, but not who wrote them or when it was posted'),
-  ('Member', 'iamamember', 'can post and view messages, including who wrote them and when it was posted'),
-  ('Admin', 'iwillnotabusethispower', 'can post, view, and delete messages');
+  ('Basic', 'basic', 'can post and view messages, but not who wrote them or when it was posted', false, false),
+  ('Member', 'iamamember', 'can post and view messages, including who wrote them and when it was posted', true, false),
+  ('Admin', 'iwillnotabusethispower', 'can post, view, and delete messages', true, true);
 
 `;
 

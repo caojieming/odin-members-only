@@ -98,7 +98,7 @@ async function logOut(req, res, next) {
 
 async function updateMembership(req, res, next) {
   const username = res.locals.currentUser.username;
-  const membershipCode = req.body.membership_code;
+  const membershipCode = req.body["membership-code"];
   const postErrors = await db.updateUserMembership(username, membershipCode);
 
   // check if any post errors (mainly if an entry with the same username already exists in the "users" DB)

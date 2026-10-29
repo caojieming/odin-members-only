@@ -1,6 +1,18 @@
 const pool = require("./pool");
 
 
+async function getUser(username) {
+  const { rows } = await pool.query(
+    `SELECT u.*, m.*
+    FROM users u
+    JOIN memberships m ON u.membership = m.membership
+    WHERE u.username = $1`,
+    [username]
+  );
+  return rows[0] || null;
+}
+
+
 async function getAllMessages() {
   const { rows } = await pool.query("SELECT * FROM messages");
   return rows;
@@ -23,11 +35,12 @@ async function createUser(name, username, hashedPassword) {
 
 
 async function updateUserMembership(username, membershipCode) {
+  console.log(membershipCode);
   try {
     const membershipResult = await pool.query(`
       SELECT membership
       FROM memberships
-      WHERE code = $1;`,
+      WHERE code = $1`,
       [membershipCode]
     );
     if (membershipResult.rows.length === 0) {
@@ -39,7 +52,7 @@ async function updateUserMembership(username, membershipCode) {
     const updateUserResult = await pool.query(
       `UPDATE users
        SET membership = $2
-       WHERE username = $1;`,
+       WHERE username = $1`,
       [username, membership]
     );
     if (updateUserResult.rowCount === 0) {
@@ -67,6 +80,8 @@ async function createMessage(title, username, body) {
 
 
 module.exports = {
+  getUser,
+  getAllMessages,
   createUser,
   updateUserMembership,
   createMessage,
