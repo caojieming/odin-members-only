@@ -136,7 +136,13 @@ async function submitMessage(req, res, next) {
       errors: postErrors,
     });
   }
+}
 
+
+async function deleteMessage(req, res) {
+  const messageId = req.params.message_id;
+  await db.deleteMessage(messageId);
+  res.redirect("/");
 }
 
 
@@ -149,4 +155,5 @@ module.exports = {
   updateMembership,
   validateMessage,
   submitMessage,
+  deleteMessage,
 };

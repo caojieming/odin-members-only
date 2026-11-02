@@ -79,10 +79,20 @@ async function createMessage(title, username, body) {
 }
 
 
+async function deleteMessage(id) {
+  const sql = `
+  DELETE FROM messages
+  WHERE id = $1;
+  `;
+  await pool.query(sql, [id]);
+}
+
+
 module.exports = {
   getUser,
   getAllMessages,
   createUser,
   updateUserMembership,
   createMessage,
+  deleteMessage,
 };

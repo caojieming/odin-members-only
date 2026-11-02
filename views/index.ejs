@@ -34,6 +34,11 @@
               <p><%= `Posted: ${curMsg.created_at}` %></p>
             <% } %>
             <p><%= `Body Text: ${curMsg.body}` %></p>
+            <% if(locals.currentUser && currentUser.can_delete) { %>
+              <form method="POST" action="/deleteMessage/<%= curMsg.id %>">
+                <button class="delete-btn">Delete</button>
+              </form>
+            <% } %>
           </div>
         <% } %>
       </div>

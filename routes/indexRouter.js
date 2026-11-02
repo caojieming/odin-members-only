@@ -20,5 +20,7 @@ router.post("/membership-form", dbController.updateMembership);
 router.get("/message-form", (req, res) => res.render("message-form"));
 router.post("/message-form", dbController.validateMessage, dbController.submitMessage);
 
+router.post("/deleteMessage/:message_id", dbController.deleteMessage);
+
 
 module.exports = router;
