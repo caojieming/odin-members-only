@@ -5,15 +5,8 @@ const passport = require("../auth/authController");
 
 
 async function openHome(req, res) {
-  // if a user is logged in, then get all messages so they can be displayed
-  if(req.user) {
-    const messages = await db.getAllMessages();
-    res.render("index", { user: req.user, messages: messages });
-  }
-  // otherwise, don't bother getting the messages
-  else {
-    res.render("index", { user: req.user });
-  }
+  const messages = await db.getAllMessages();
+  res.render("index", { user: req.user, messages: messages });
 }
 
 
