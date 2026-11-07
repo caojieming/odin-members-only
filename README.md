@@ -2,6 +2,8 @@
 
 A server based webapp creating an exclusive clubhouse where registered members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.
 
+Deployed and live at: https://odin-members-only-egra.onrender.com/
+
 TODO:
 - 
 
@@ -17,7 +19,7 @@ Run `npm update` to update outdated packages.
 - run `npm run popprod`, then check Neon DB tables (terminal execution will keep running for some reason even if the DB has finished populating, just ctr + c out of it)
 3. deploy git repo to Render
 - build command: `npm install`
-- start command: `npm run app server`
+- start command: `npm run app server` and add SERVER_DB_URL to Render environmental variables, or `npm run app '{SERVER_DB_URL}'`
 - you will need to add a credit card if you removed it before, you can remove it after setting up the project to ensure you don't get charged
 
 ## npm scripts included:
