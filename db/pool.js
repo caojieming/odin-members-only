@@ -7,11 +7,7 @@ function getPool() {
   // default "npm run app" has 2 arguments: [0] node and [1] app.js
   if(argv.length < 3) {
     return new Pool({
-      host: process.env.HOST, 
-      user: process.env.USER,
-      database: process.env.DATABASE,
-      password: process.env.PASSWORD,
-      port: Number(process.env.DBPORT)
+      connectionString: process.env.LOCAL_DB_URL
     });
   }
   else if(argv.length > 3) {
@@ -19,10 +15,16 @@ function getPool() {
   }
   else {
     // looking at the extra arg, aka arg[2]
-    // should be in the general format of: `postgresql://${process.env.USER}:${process.env.PASSWORD}@localhost:${process.env.DBPORT}/${process.env.DATABASE}`
-    return new Pool({
-      connectionString: argv[2]
-    })
+    if(argv[2] === "server") {
+      return new Pool({
+        connectionString: process.env.SERVER_DB_URL
+      });
+    }
+    else {
+      return new Pool({
+        connectionString: argv[2]
+      });
+    }
   }
 }
 

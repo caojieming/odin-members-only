@@ -3,7 +3,7 @@
 A server based webapp creating an exclusive clubhouse where registered members can write anonymous posts. Inside the clubhouse, members can see who the author of a post is, but outside they can only see the story and wonder who wrote it.
 
 TODO:
-- implement delete button + functions for admins
+- 
 
 Run `npm install` to install all packages/dev dependencies.<br>
 Run `npm outdated` to check if any packages are outdated (can generally ignore yellow packages: current version is the wanted version, but not the latest version).<br>
@@ -17,7 +17,7 @@ Run `npm update` to update outdated packages.
 - run `npm run popprod`, then check Neon DB tables (terminal execution will keep running for some reason even if the DB has finished populating, just ctr + c out of it)
 3. deploy git repo to Render
 - build command: `npm install`
-- start command: `npm run app '{your Neon link here}'`
+- start command: `npm run app server`
 - you will need to add a credit card if you removed it before, you can remove it after setting up the project to ensure you don't get charged
 
 ## npm scripts included:
